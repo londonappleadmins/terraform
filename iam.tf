@@ -21,3 +21,9 @@ resource "aws_iam_policy" "laa_deploy_policy" {
   name   = "laa_deploy_policy"
   policy = "${data.aws_iam_policy_document.laa_s3_policy_data.json}"
 }
+
+
+resource "aws_iam_user_policy_attachment" "test-attach" {
+  user       = "${aws_iam_user.laa_s3_deploy.name}"
+  policy_arn = "${aws_iam_policy.laa_deploy_policy.arn}"
+}
