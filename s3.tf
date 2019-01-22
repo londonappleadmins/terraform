@@ -67,7 +67,7 @@ POLICY
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = "londonappleadmins-logs"
-  acl = "log-delivery-write"
+  acl    = "log-delivery-write"
 
   lifecycle_rule {
     enabled = true
