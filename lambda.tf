@@ -22,8 +22,8 @@ EOF
 }
 
 resource "aws_iam_policy" "lambda_logging" {
-  name = "lambda_logging"
-  path = "/"
+  name        = "lambda_logging"
+  path        = "/"
   description = "IAM policy for logging from a lambda"
 
   policy = <<EOF
@@ -45,7 +45,7 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role = "${aws_iam_role.iam_for_redirect_lambda.name}"
+  role       = "${aws_iam_role.iam_for_redirect_lambda.name}"
   policy_arn = "arn:aws:iam::aws:policy/CloudwatchLogsFullAccess"
 }
 

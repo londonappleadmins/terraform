@@ -30,6 +30,6 @@ resource "aws_route53_record" "laa_www" {
   zone_id = "${var.zone_id}"
   type    = "CNAME"
   name    = "${var.www_host}"
-  records        = ["${var.main_zone_host}"]
-  ttl = 60
+  records = ["${var.main_zone_host}"]
+  ttl     = 60
 }
