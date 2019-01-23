@@ -18,7 +18,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
   // All values are defaults from the AWS console.
   default_cache_behavior {
     lambda_function_association {
-      event_type = "origin-request"
+      event_type = "viewer-request"
       lambda_arn = "${aws_lambda_function.redirect_lambda.arn}:${aws_lambda_function.redirect_lambda.version}"
     }
 
@@ -42,7 +42,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     }
   }
 
-  aliases = ["${var.root_domain_name}"]
+  aliases = ["${var.root_domain_name}", "${var.www_domain_name}"]
 
   restrictions {
     geo_restriction {

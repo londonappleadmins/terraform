@@ -22,7 +22,3 @@ variable "root_domain_name" {
 variable "bucket_name" {
   default = "londonappleadmins"
 }
-
-variable "301_name" {
-  default = "londonappleadmins-301"
-}

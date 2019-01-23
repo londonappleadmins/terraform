@@ -36,35 +36,6 @@ resource "aws_s3_bucket_policy" "www" {
   policy = "${data.aws_iam_policy_document.s3_policy.json}"
 }
 
-resource "aws_s3_bucket" "301" {
-  bucket = "${var.301_name}"
-  acl    = "public-read"
-
-  website {
-    redirect_all_requests_to = "https://${var.root_domain_name}"
-  }
-}
-
-resource "aws_s3_bucket_policy" "301" {
-  bucket = "${aws_s3_bucket.301.id}"
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "grahamsfancy301policy",
-  "Statement": [
-    {
-      "Sid": "AddPerm",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource":["arn:aws:s3:::${var.301_name}/*"]
-    }
-  ]
-}
-POLICY
-}
-
 resource "aws_s3_bucket" "log_bucket" {
   bucket = "londonappleadmins-logs"
   acl    = "log-delivery-write"
