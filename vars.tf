@@ -12,11 +12,11 @@ terraform {
 }
 
 variable "www_domain_name" {
-  default = "www.laa.grahamgilbert.com"
+  default = "www.londonappleadmins.org.uk"
 }
 
 variable "root_domain_name" {
-  default = "laa.grahamgilbert.com"
+  default = "londonappleadmins.org.uk"
 }
 
 variable "bucket_name" {
