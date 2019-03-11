@@ -20,7 +20,6 @@ resource "aws_route53_record" "www-ns" {
   ]
 }
 
-
 resource "aws_route53_record" "laa_root" {
   zone_id = "${aws_route53_zone.main.zone_id}"
   type    = "A"
