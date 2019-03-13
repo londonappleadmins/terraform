@@ -6,7 +6,6 @@ resource "aws_route53_record" "laa_root" {
   zone_id = "${aws_route53_zone.main.zone_id}"
   type    = "A"
   name    = "londonappleadmins.org.uk"
-  ttl     = 3600
 
   alias {
     name                   = "${aws_cloudfront_distribution.www_distribution.domain_name}"
