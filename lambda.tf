@@ -46,7 +46,7 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = "${aws_iam_role.iam_for_redirect_lambda.name}"
-  policy_arn = "arn:aws:iam::aws:policy/CloudwatchLogsFullAccess"
+  policy_arn = "${aws_iam_policy.lambda_logging.arn}"
 }
 
 data "archive_file" "redirect_lambda_zip" {
