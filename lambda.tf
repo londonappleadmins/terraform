@@ -1,24 +1,39 @@
 resource "aws_iam_role" "iam_for_redirect_lambda" {
   name = "laa_iam_for_redirect_lambda"
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": [
-          "lambda.amazonaws.com",
-          "edgelambda.amazonaws.com"
-        ]
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
+  assume_role_policy = "${data.aws_iam_policy_document.iam_for_redirect_lambda.json}"
 }
-EOF
+
+data "aws_iam_policy_document" "iam_for_redirect_lambda" {
+  statement {
+    sid     = "1"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "lambda_logging" {
+
+
+  statement {
+    sid = "1"
+    actions = [
+      "logs:CreateLogDelivery",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:GetLogEvents",
+      "logs:PutDestination",
+      "logs:PutLogEvents"
+    ]
+    resources = [
+      "arn:aws:logs:*:*:*",
+    ]
+  }
+
 }
 
 resource "aws_iam_policy" "lambda_logging" {
@@ -26,22 +41,7 @@ resource "aws_iam_policy" "lambda_logging" {
   path        = "/"
   description = "IAM policy for logging from a lambda"
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "arn:aws:logs:*:*:*",
-      "Effect": "Allow"
-    }
-  ]
-}
-EOF
+  policy = "${data.aws_iam_policy_document.lambda_logging.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
