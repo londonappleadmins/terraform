@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "iam_for_redirect_lambda" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
+      identifiers = ["lambda.amazonaws.com", "edgelambda.amazonaws.com"]
     }
   }
 }
